@@ -1,0 +1,27 @@
+{
+  "name": "library-manager",
+  "version": "1.0.0",
+  "description": "Manages library books",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwinters8/Library-Manager.git"
+  },
+  "author": "Clark Winters",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cwinters8/Library-Manager/issues"
+  },
+  "homepage": "https://github.com/cwinters8/Library-Manager#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pug": "^2.0.3",
+    "sequelize": "^4.42.1",
+    "sequelize-cli": "^5.4.0",
+    "sqlite3": "^4.0.6"
+  }
+}
