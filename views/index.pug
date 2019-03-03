@@ -15,4 +15,9 @@ block body
         th Genre
         th Year
     tbody
-      block table-data
+      each book in books
+        tr
+          td= book.title
+          td= book.author
+          td= book.genre
+          td= book.year

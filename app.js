@@ -1,4 +1,6 @@
 const express = require('express');
+const router = express.Router();
+const Book = require('./models/book');
 
 // create the app
 const app = express();
@@ -17,8 +19,11 @@ app.use('/static', express.static('public'));
  ******************/
 // home page
 app.get('/', (req, res) => {
-  res.render('index');
+  Book.findAll({order: [["author", "ASC"], ["title", "ASC"]]}).then(books => {
+    res.render('index', {books});
+  })
 });
+
 
 
 
