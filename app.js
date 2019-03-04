@@ -19,7 +19,7 @@ app.use('/static', express.static('public'));
  ******************/
 // home page
 app.get('/', (req, res) => {
-  Book.findAll({order: [["author", "ASC"], ["title", "ASC"]]}).then(books => {
+  Book.findAll({order: [["title", "ASC"]]}).then(books => {
     res.render('index', {books});
   })
 });
