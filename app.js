@@ -70,7 +70,7 @@ app.post('/books/:id', (req, res) => {
 app.post('/books/:id/delete', (req, res) => {
   Book.destroy({where: {id: req.params.id}}).then(() => {
     res.redirect('/books');
-  })
+  });
 });
 
 // start the app
