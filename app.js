@@ -66,7 +66,12 @@ app.post('/books/:id', (req, res) => {
   })
 });
 
-
+// delete a book
+app.post('/books/:id/delete', (req, res) => {
+  Book.destroy({where: {id: req.params.id}}).then(() => {
+    res.redirect('/books');
+  })
+});
 
 // start the app
 const port = process.env.PORT || 3000;
