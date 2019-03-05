@@ -4,7 +4,8 @@ const path = require('path');
 const sequelize = new Sequelize({
   "database": "library",
   "dialect": "sqlite",
-  "storage": path.resolve(__dirname, '../library.db')
+  "storage": path.resolve(__dirname, '../library.db'),
+  "operatorsAliases": false
 })
 
 const BookModel = (sequelize, DataTypes) => {
