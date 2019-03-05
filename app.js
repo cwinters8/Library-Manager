@@ -34,6 +34,17 @@ app.get('/books', (req, res) => {
   });
 });
 
+// new book
+app.get('/books/new', (req, res) => {
+  res.render('new-book');
+});
+// create the new book
+app.post('/books/new', (req, res) => {
+  Book.create(req.body).then(() => {
+    res.redirect('/books');
+  });
+});
+
 // route for each book
 app.get('/books/:id', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
@@ -54,6 +65,8 @@ app.post('/books/:id', (req, res) => {
     res.redirect('/books');
   })
 });
+
+
 
 // start the app
 const port = process.env.PORT || 3000;

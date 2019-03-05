@@ -5,23 +5,7 @@ block title
 
 block body
   h1 Update Book
-  form(method="post" action=`/books/${book.id}`)
-    p
-      label(for="title") Title
-      input(name="title" id="title" type="text" value=book.title)
-    p
-      label(for="author") Author
-      input(name="author" id="author" type="text" value=book.author)
-    p
-      label(for="genre") Genre
-      input(name="genre" id="genre" type="text" value=book.genre)
-    p
-      label(for="year") Year
-      input(name="year" id="year" type="text" value=book.year)
-    p
-      input(type="submit", value="Update Book")
+  include book-form
   form(method="post" action=`/books/${book.id}/delete` onsubmit="return confirm('Do you really want to delete this book?');")
-    p
-      a.button(href="/books") Cancel
     p
       input(type="submit" value="Delete Book")
