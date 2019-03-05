@@ -17,14 +17,16 @@ app.use('/static', express.static('public'));
 /******************
  ***** Routes *****
  ******************/
-// home page
+// home route
 app.get('/', (req, res) => {
+  res.redirect('/books');
+});
+
+app.get('/books', (req, res) => {
   Book.findAll({order: [["title", "ASC"]]}).then(books => {
     res.render('index', {books});
   })
-});
-
-
+})
 
 
 
