@@ -1,5 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const bodyParser = require('body-parser');
+
+// book model
 const Book = require('./models/book');
 
 // create the app
@@ -13,6 +15,9 @@ app.set('view engine', 'pug');
 
 // static content
 app.use('/static', express.static('public'));
+
+// body parsing
+app.use(bodyParser.urlencoded({extended: false}));
 
 /******************
  ***** Routes *****
@@ -30,10 +35,24 @@ app.get('/books', (req, res) => {
 });
 
 // route for each book
-app.get('/:id', (req, res) => {
+app.get('/books/:id', (req, res) => {
   Book.findByPk(req.params.id).then(book => {
     res.render('update-book', {book});
   });
+});
+// update a book
+app.post('/books/:id', (req, res) => {
+  Book.update(
+    {
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      year: req.body.year
+    },
+    {where: {id: req.params.id}}
+  ).then(() => {
+    res.redirect('/books');
+  })
 });
 
 // start the app
