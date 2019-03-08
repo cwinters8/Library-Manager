@@ -90,16 +90,19 @@ app.post('/books/:id/delete', (req, res, next) => {
   });
 });
 
-// error handling
+/******************
+ * Error Handling *
+ ******************/
 // 404
 app.use((req, res, next) => {
   res.render('page-not-found');
+  res.status(404);
 });
 
 // caught errors
 app.use((err, req, res, next) => {
   res.render('error');
-  console.log(err);
+  console.error(err);
 });
 
 // start the app
