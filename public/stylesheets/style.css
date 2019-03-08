@@ -95,3 +95,14 @@ input[type=text] {
 .error {
   color: rgb(236, 15, 15);
 }
+
+#robot {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80vh;
+  max-width: 100%;
+  object-fit: scale-down;
+}

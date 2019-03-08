@@ -19,6 +19,8 @@ app.use('/static', express.static('public'));
 // body parsing
 app.use(bodyParser.urlencoded({extended: false}));
 
+
+
 /******************
  ***** Routes *****
  ******************/
@@ -28,9 +30,11 @@ app.get('/', (req, res) => {
 });
 
 // books route
-app.get('/books', (req, res) => {
+app.get('/books', (req, res, next) => {
   Book.findAll({order: [["title", "ASC"]]}).then(books => {
     res.render('index', {books});
+  }).catch(err => {
+    next(err);
   });
 });
 
@@ -39,20 +43,29 @@ app.get('/books/new', (req, res) => {
   res.render('new-book');
 });
 // create the new book
-app.post('/books/new', (req, res) => {
+app.post('/books/new', (req, res, next) => {
   Book.create(req.body).then(() => {
     res.redirect('/books');
+  }).catch(err => {
+    next(err);
   });
 });
 
 // route for each book
-app.get('/books/:id', (req, res) => {
+app.get('/books/:id', (req, res, next) => {
   Book.findByPk(req.params.id).then(book => {
-    res.render('update-book', {book});
+    if (book) {
+      res.render('update-book', {book});
+    } else {
+      next("Book does not exist");
+    }
+  }).catch(err => {
+    next(err);
   });
 });
+
 // update a book
-app.post('/books/:id', (req, res) => {
+app.post('/books/:id', (req, res, next) => {
   Book.update(
     {
       title: req.body.title,
@@ -63,14 +76,30 @@ app.post('/books/:id', (req, res) => {
     {where: {id: req.params.id}}
   ).then(() => {
     res.redirect('/books');
-  })
+  }).catch(err => {
+    next(err);
+  });
 });
 
 // delete a book
-app.post('/books/:id/delete', (req, res) => {
+app.post('/books/:id/delete', (req, res, next) => {
   Book.destroy({where: {id: req.params.id}}).then(() => {
     res.redirect('/books');
+  }).catch(err => {
+    next(err);
   });
+});
+
+// error handling
+// 404
+app.use((req, res, next) => {
+  res.render('page-not-found');
+});
+
+// caught errors
+app.use((err, req, res, next) => {
+  res.render('error');
+  console.log(err);
 });
 
 // start the app
