@@ -8,6 +8,25 @@ const Book = require('./models/book');
 const app = express();
 
 /******************
+ **** Helpers ****
+ ******************/
+function validateForm(err, req, res, view) {
+  const book = Book.build(req.body);
+  // deal with ID later
+  const message = err.errors.reduce((msg, item) => {
+    if (msg.length > 0) {
+      return msg + '\n' + item.message;
+    } else {
+      return msg + item.message;
+    }
+  }, '');
+  res.render(view, {
+    book: book,
+    errors: message
+  });
+}
+
+/******************
  *** Middleware ***
  ******************/
 // set view engine to pug
@@ -18,8 +37,6 @@ app.use('/static', express.static('public'));
 
 // body parsing
 app.use(bodyParser.urlencoded({extended: false}));
-
-
 
 /******************
  ***** Routes *****
@@ -46,8 +63,12 @@ app.get('/books/new', (req, res) => {
 app.post('/books/new', (req, res, next) => {
   Book.create(req.body).then(() => {
     res.redirect('/books');
-  }).catch(err => {
-    next(err);
+  }).catch((err) => {
+    if (err.name === 'SequelizeValidationError'){
+      validateForm(err, req, res, 'new-book');
+    } else {
+      next(err);
+    }
   });
 });
 
