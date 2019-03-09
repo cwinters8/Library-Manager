@@ -3,22 +3,24 @@ extends layout
 block title
 
 block body
-  block header
-  form.d-inline-block(method="post")
-    pre.error= errors
-    div.form-group
-      label(for="title") Title
-      input(name="title" id="title" type="text" value=book ? book.title : '')
-    div.form-group
-      label(for="author") Author
-      input(name="author" id="author" type="text" value=book ? book.author : '')
-    div.form-group
-      label(for="genre") Genre
-      input(name="genre" id="genre" type="text" value=book ? book.genre : '')
-    div.form-group
-      label(for="year") Year
-      input(name="year" id="year" type="text" value=book ? book.year : '')
-    div.d-flex.flex-row.justify-content-around
-      block buttons
-        input.btn.btn-success(type="submit", value=`${book ? 'Update' : 'Create New'} Book`)
-        a.btn.btn-secondary(href="/books") Cancel
+  div.container.mt-4
+    div.row.justify-content-center
+      form.d-inline-block(method="post")
+        block header
+        pre.error= errors
+        div.form-group
+          label(for="title") Title
+          input(name="title" id="title" type="text" value=book ? book.title : '')
+        div.form-group
+          label(for="author") Author
+          input(name="author" id="author" type="text" value=book ? book.author : '')
+        div.form-group
+          label(for="genre") Genre
+          input(name="genre" id="genre" type="text" value=book ? book.genre : '')
+        div.form-group
+          label(for="year") Year
+          input(name="year" id="year" type="text" value=book ? book.year : '')
+        div.d-flex.flex-row.justify-content-around
+          block buttons
+            input.btn.btn-success(type="submit", value=`${book ? 'Update' : 'Create New'} Book`)
+            a.btn.btn-secondary(href="/books") Cancel
