@@ -5,6 +5,11 @@ block title
 
 block body
   h1 Books
+  div.float-right
+    form
+      div.form-group.search
+        label(for="search") Search
+        input(title="search" id="search" type="text")
   p
     a.btn.btn-success(href="/books/new") Create New Book
   table.table

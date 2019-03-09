@@ -91,6 +91,15 @@ input[type=text] {
   width: 300px;
 }
 
+.search label {
+  min-width: unset;
+}
+
+.search input {
+  padding: 3px;
+  width: unset;
+}
+
 .error {
   color: rgb(236, 15, 15);
 }
