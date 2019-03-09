@@ -1,18 +1,17 @@
 form(method="post")
   pre.error= errors
-  p
+  div.form-group
     label(for="title") Title
     input(name="title" id="title" type="text" value=book ? book.title : '')
-  p
+  div.form-group
     label(for="author") Author
     input(name="author" id="author" type="text" value=book ? book.author : '')
-  p
+  div.form-group
     label(for="genre") Genre
     input(name="genre" id="genre" type="text" value=book ? book.genre : '')
-  p
+  div.form-group
     label(for="year") Year
     input(name="year" id="year" type="text" value=book ? book.year : '')
-  p
-    input(type="submit", value=`${book ? 'Update' : 'Create New'} Book`)
-  p
-    a.button(href="/books") Cancel
+  div.d-flex.flex-row.justify-content-around
+    input.btn(type="submit", value=`${book ? 'Update' : 'Create New'} Book`)
+    a.btn.button(href="/books") Cancel

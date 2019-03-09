@@ -29,17 +29,12 @@ a.button:hover {
 }
 
 form a.button, input[type=submit] {
-  margin-left: 140px;
   transition: 0.4s;
 }
 
-input[type=submit] {
-  border: 0;
+a.button:hover, input[type=submit]:hover {
+  background-color: #01b189;
 }
-
-  a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
-  }
 
 p {
   margin: 20px auto;
