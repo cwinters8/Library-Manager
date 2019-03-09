@@ -10,9 +10,9 @@ const app = express();
 /******************
  **** Helpers ****
  ******************/
+// validate forms for updating or creating books
 function validateForm(err, req, res, view) {
   const book = Book.build(req.body);
-  // deal with ID later
   const message = err.errors.reduce((msg, item) => {
     if (msg.length > 0) {
       return msg + '\n' + item.message;
@@ -98,7 +98,11 @@ app.post('/books/:id', (req, res, next) => {
   ).then(() => {
     res.redirect('/books');
   }).catch(err => {
-    next(err);
+    if (err.name === 'SequelizeValidationError'){
+      validateForm(err, req, res, 'update-book');
+    } else {
+      next(err);
+    }
   });
 });
 
