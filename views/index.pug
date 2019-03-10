@@ -8,8 +8,8 @@ block body
   div.float-right
     form
       div.form-group.search
-        label(for="search") Search
-        input(title="search" id="search" type="text")
+        label(for="search") Search:
+        input(title="search" id="search" type="search" placeholder="Search")
   p
     a.btn.btn-success(href="/books/new") Create New Book
   table.table
@@ -22,8 +22,8 @@ block body
     tbody
       each book in books
         tr
-          td
+          td.title
             a(href=`/books/${book.id}`)= book.title
-          td= book.author
-          td= book.genre
-          td= book.year
+          td.author= book.author
+          td.genre= book.genre
+          td.year= book.year

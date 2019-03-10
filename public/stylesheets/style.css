@@ -62,9 +62,9 @@ tr {
   min-height: 50px;
 }
 
-tr:nth-child(2n) {
+/* tr:nth-child(2n) {
   background: #E7E7E7;
-}
+} */
 
 td {
   padding: 5px 20px 5px 10px;
@@ -96,6 +96,7 @@ input[type=text] {
 }
 
 .search input {
+  margin-left: 10px;
   padding: 3px;
   width: unset;
 }
