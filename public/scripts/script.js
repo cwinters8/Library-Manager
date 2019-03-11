@@ -1,4 +1,3 @@
-const tableBody = document.querySelector('.table tbody');
 const tableRows = document.querySelectorAll('.table tbody tr');
 
 /**
@@ -66,8 +65,8 @@ paginate(buildArray(tableRows));
 const searchBox = document.getElementById('search');
 searchBox.addEventListener('keyup', e => {
   const searchTerm = e.target.value.toLowerCase();
-  const tableRows = document.querySelectorAll('.table tbody tr');
-  tableRows.forEach(row => {
+  const books = document.querySelectorAll('.table tbody tr');
+  books.forEach(row => {
     const children = row.childNodes;
     let match = false;
     children.forEach(child => {
