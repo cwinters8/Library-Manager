@@ -34,10 +34,11 @@ function showPage(books) {
 
 // main function to add pagination
 function paginate(arrayOfBooks) {
+  const books = buildArray(arrayOfBooks);
   // clear links
   document.querySelector('ul.pagination').innerHTML = '';
   // append page links
-  arrayOfBooks.forEach((array, index) => {
+  books.forEach((array, index) => {
     const li = document.createElement('li');
     li.innerHTML = `<a class="page-link" href="#">${index + 1}</a>`;
     li.className = 'page-item';
@@ -59,7 +60,7 @@ function paginate(arrayOfBooks) {
   document.querySelector('.page-item').click();
 }
 
-paginate(buildArray(tableRows));
+paginate(tableRows);
 
 /**
  * DYNAMIC SEARCH
@@ -81,5 +82,5 @@ searchBox.addEventListener('keyup', e => {
       matched.push(book);
     }
   });
-  paginate(buildArray(matched));
+  paginate(matched);
 });
