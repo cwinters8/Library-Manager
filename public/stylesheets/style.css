@@ -115,3 +115,12 @@ input[type=text] {
   max-width: 100%;
   object-fit: scale-down;
 }
+
+.page-link {
+  color: #28a745;
+}
+
+.page-item.active .page-link {
+  background-color: #28a745;
+  border-color: #28a745;
+}
