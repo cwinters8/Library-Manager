@@ -34,6 +34,8 @@ function showPage(books) {
 
 // main function to add pagination
 function paginate(arrayOfBooks) {
+  // clear links
+  document.querySelector('ul.pagination').innerHTML = '';
   // append page links
   arrayOfBooks.forEach((array, index) => {
     const li = document.createElement('li');
@@ -66,8 +68,9 @@ const searchBox = document.getElementById('search');
 searchBox.addEventListener('keyup', e => {
   const searchTerm = e.target.value.toLowerCase();
   const books = document.querySelectorAll('.table tbody tr');
-  books.forEach(row => {
-    const children = row.childNodes;
+  const matched = [];
+  books.forEach(book => {
+    const children = book.childNodes;
     let match = false;
     children.forEach(child => {
       if (child.textContent.toLowerCase().includes(searchTerm)) {
@@ -75,9 +78,8 @@ searchBox.addEventListener('keyup', e => {
       }
     });
     if (match) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
+      matched.push(book);
     }
   });
+  paginate(buildArray(matched));
 });
