@@ -1,5 +1,11 @@
 const tableRows = document.querySelectorAll('.table tbody tr');
 
+// TO-DO: Need to sort across pages
+  // Capture elements that were hidden due to search
+  // Show all elements
+  // Sort
+  // Re-hide previously hidden elements and paginate again
+
 /**
  * SORT
  */
@@ -10,6 +16,9 @@ document.querySelectorAll('a.sort').forEach(sortLink => {
     const classList = sortLink.classList;
     const fieldClass = classList[1];
     const fieldName = fieldClass.match(/^sort-(\w+)$/)[1];
+    // capture the rows that were hidden from search
+    const searchHidden = document.querySelectorAll('.search-hidden');
+    showAll();
     // if the class list already has asc, then sort desc, and vice versa
     if (classList.contains('asc')) {
       tinysort('tbody tr', {selector: `td.${fieldName}`, order: 'desc'});
@@ -20,6 +29,12 @@ document.querySelectorAll('a.sort').forEach(sortLink => {
       classList.remove('asc', 'desc');
       classList.add('asc');
     }
+    // re-hide previously hidden elements from search
+    searchHidden.forEach(book => {
+      book.style.display = 'none';
+    });
+    // paginate shown elements
+    paginate(document.querySelectorAll('tbody tr:not([style*="display: none"])'));
   });
 });
 
@@ -46,8 +61,10 @@ function buildArray(books) {
 // show a given list of books
 function showPage(books) {
   tableRows.forEach(book => {
-    // unhide all books
-    book.style.display = '';
+    // unhide all books, unless search-hidden
+    if (!book.classList.contains('search-hidden')) {
+      book.style.display = '';
+    }
     // hide all books except if it's in the given list
     if (!books.includes(book)) {
       book.style.display = 'none';
@@ -66,6 +83,13 @@ function clearNoResults() {
   if (noResults) {
     document.querySelector('body').removeChild(noResults);
   }
+}
+
+// show all books
+function showAll() {
+  tableRows.forEach(book => {
+    book.style.display = '';
+  })
 }
 
 // hide all books
@@ -125,6 +149,7 @@ searchBox.addEventListener('keyup', e => {
   const matched = [];
   books.forEach(book => {
     const children = book.childNodes;
+    book.classList.remove('search-hidden');
     let match = false;
     children.forEach(child => {
       if (child.textContent.toLowerCase().includes(searchTerm)) {
@@ -133,6 +158,8 @@ searchBox.addEventListener('keyup', e => {
     });
     if (match) {
       matched.push(book);
+    } else {
+      book.classList.add('search-hidden');
     }
   });
   if (matched.length > 0) {
