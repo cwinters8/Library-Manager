@@ -1,11 +1,5 @@
 const tableRows = document.querySelectorAll('.table tbody tr');
 
-// TO-DO: Need to sort across pages
-  // Capture elements that were hidden due to search
-  // Show all elements
-  // Sort
-  // Re-hide previously hidden elements and paginate again
-
 /**
  * SORT
  */
