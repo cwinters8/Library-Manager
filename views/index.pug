@@ -15,10 +15,22 @@ block body
   table.table
     thead
       tr
-        th Title
-        th Author
-        th Genre
-        th Year
+        th
+          span Title 
+          a.sort.sort-title(href="")
+            img(src="/static/images/icons8-sort-24.png")
+        th
+          span Author 
+          a.sort.sort-author(href="")
+            img(src="/static/images/icons8-sort-24.png")
+        th
+          span Genre 
+          a.sort.sort-genre(href="")
+            img(src="/static/images/icons8-sort-24.png")
+        th
+          span Year 
+          a.sort.sort-year(href="")
+            img(src="/static/images/icons8-sort-24.png")
     tbody
       each book in books
         tr

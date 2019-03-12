@@ -124,3 +124,8 @@ input[type=text] {
   background-color: #28a745;
   border-color: #28a745;
 }
+
+th img {
+  height: 15px;
+  width: 15px;
+}
