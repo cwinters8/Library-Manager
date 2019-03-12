@@ -51,7 +51,7 @@ function paginate(arrayOfBooks) {
         item.className = 'page-item';
       })
       // add active class to this link
-      li.classList += ' active';
+      li.classList.add('active');
       // show current array
       showPage(array);
     });
