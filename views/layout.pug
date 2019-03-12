@@ -5,9 +5,10 @@ html
     link(rel="stylesheet", href="/static/stylesheets/bootstrap.min.css")
     link(rel="stylesheet", href="/static/stylesheets/style.css")
     link(rel="shortcut icon", href="/static/favicon.ico", type="image/x-icon")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Pacifico")
   body
     block body
-    script(src="/static/scripts/jquery-3.3.1.min.js")
-    script(src="/static/scripts/bootstrap.bundle.min.js")
-    script(src="/static/scripts/tinysort.min.js")
-    script(src="/static/scripts/script.js")
+    block scripts
+      script(src="/static/scripts/jquery-3.3.1.min.js")
+      script(src="/static/scripts/bootstrap.bundle.min.js")
+      script(src="/static/scripts/tinysort.min.js")

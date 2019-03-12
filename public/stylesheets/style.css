@@ -84,7 +84,7 @@ input[type=text] {
   color: rgb(236, 15, 15);
 }
 
-#robot {
+#fourohfour {
   display: block;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -94,6 +94,16 @@ input[type=text] {
   max-width: 100%;
   object-fit: scale-down;
   border-radius: 10px;
+}
+
+.go-home {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 25px;
+}
+
+.server-error * {
+  text-align: center;
 }
 
 .page-link, .page-link:hover {
