@@ -148,6 +148,7 @@ function sort(className, order) {
     }
   });
   const tbody = document.querySelector('tbody');
+  // TO-DO: This whole section needs to be fixed. Only currently displayed values should be sorted.
   // empty tbody
   tbody.innerHTML = '';
   // replace with sorted rows
@@ -163,13 +164,14 @@ document.querySelectorAll('a.sort').forEach(sortLink => {
     e.preventDefault();
     const classList = sortLink.classList;
     const fieldClass = classList[1];
+    const fieldName = fieldClass.match(/^sort-(\w+)$/)[1];
     // if the class list already has asc, then sort desc, and vice versa
     if (classList.contains('asc')) {
-      sort(fieldClass, 'desc');
+      tinysort('tbody tr', {selector: `td.${fieldName}`, order: 'desc'});
       classList.remove('asc', 'desc');
       classList.add('desc');
     } else {
-      sort(fieldClass, 'asc');
+      tinysort('tbody tr', {selector: `td.${fieldName}`});
       classList.remove('asc', 'desc');
       classList.add('asc');
     }
