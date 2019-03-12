@@ -32,11 +32,38 @@ function showPage(books) {
   });
 }
 
+// clear pagination links
+function clearPageLinks() {
+  document.querySelector('ul.pagination').innerHTML = '';
+}
+
+// clear no results message
+function clearNoResults() {
+  const noResults = document.querySelector('.no-results');
+  if (noResults) {
+    document.querySelector('body').removeChild(noResults);
+  }
+}
+
+// hide all books
+function hideAll() {
+  tableRows.forEach(book => {
+    book.style.display = 'none';
+  });
+  clearPageLinks();
+  // add 'no results found' message
+  clearNoResults();
+  const noResults = document.createElement('div');
+  noResults.classList.add('no-results', 'row', 'column', 'justify-content-center');
+  noResults.innerHTML = '<h2>No Results Found</h2>';
+  document.querySelector('table').after(noResults);
+}
+
 // main function to add pagination
 function paginate(arrayOfBooks) {
   const books = buildArray(arrayOfBooks);
   // clear links
-  document.querySelector('ul.pagination').innerHTML = '';
+  clearPageLinks();
   // append page links
   books.forEach((array, index) => {
     const li = document.createElement('li');
@@ -56,8 +83,11 @@ function paginate(arrayOfBooks) {
       showPage(array);
     });
   });
-  // select first page by default
-  document.querySelector('.page-item').click();
+  // select first page by default, if it exists
+  const pageItem = document.querySelector('.page-item');
+  if (pageItem) {
+    pageItem.click();
+  }
 }
 
 paginate(tableRows);
@@ -82,7 +112,12 @@ searchBox.addEventListener('keyup', e => {
       matched.push(book);
     }
   });
-  paginate(matched);
+  if (matched.length > 0) {
+    clearNoResults();
+    paginate(matched);
+  } else {
+    hideAll();
+  }
 });
 
 /**
