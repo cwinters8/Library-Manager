@@ -3,13 +3,13 @@ const path = require('path');
 
 const sequelize = new Sequelize({
   "database": "library",
-  "dialect": "sqlite",
-  "storage": path.resolve(__dirname, '../library.db'),
+  "host": "localhost",
+  "dialect": "postgres",
   "operatorsAliases": false
 })
 
 const BookModel = (sequelize, DataTypes) => {
-  return sequelize.define('Books', {
+  return sequelize.define('books', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -27,8 +27,14 @@ const BookModel = (sequelize, DataTypes) => {
         notEmpty: {msg: 'Author is required'}
       }
     },
-    genre: DataTypes.STRING,
-    year: DataTypes.INTEGER
+    genre: {
+      type: DataTypes.STRING,
+      defaultValue: null
+    },
+    year: {
+      type: DataTypes.INTEGER,
+      defaultValue: null
+    }
   });
 }
 

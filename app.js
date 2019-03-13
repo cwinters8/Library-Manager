@@ -61,7 +61,14 @@ app.get('/books/new', (req, res) => {
 });
 // create the new book
 app.post('/books/new', (req, res, next) => {
-  Book.create(req.body).then(() => {
+  Book.create(
+    {
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      year: req.body.year || null
+    }
+  ).then(() => {
     res.redirect('/books');
   }).catch((err) => {
     if (err.name === 'SequelizeValidationError'){
@@ -92,7 +99,7 @@ app.post('/books/:id', (req, res, next) => {
       title: req.body.title,
       author: req.body.author,
       genre: req.body.genre,
-      year: req.body.year
+      year: req.body.year || null
     },
     {where: {id: req.params.id}}
   ).then(() => {
