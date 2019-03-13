@@ -1,12 +1,20 @@
 const Sequelize = require('sequelize');
 const path = require('path');
 
-const sequelize = new Sequelize({
-  "database": "library",
-  "host": "localhost",
-  "dialect": "postgres",
-  "operatorsAliases": false
-})
+function getDatabaseConfig() {
+  if (process.env.DATABASE_URL) {
+    return process.env.DATABASE_URL;
+  } else {
+    return {
+      database: 'library',
+      host: 'localhost',
+      dialect: 'postgres',
+      operatorsAliases: false
+    };
+  }
+}
+
+const sequelize = new Sequelize(getDatabaseConfig());
 
 const BookModel = (sequelize, DataTypes) => {
   return sequelize.define('books', {
